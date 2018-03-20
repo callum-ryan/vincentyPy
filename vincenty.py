@@ -1,13 +1,14 @@
 import numpy as np
+import sys
 
-c1 = [44.0528021, 8.22575059999997]
-c2 = [51.457347, -0.196769]
+c1 = sys.argv[1].split(',')
+c2 = sys.argv[2].split(',')
 
 for x,y in enumerate(c1):
-	c1[x] = (y * np.pi) / 180
+	c1[x] = (np.float64(y) * np.pi) / 180
 
 for x,y in enumerate(c2):
-	c2[x] = (y * np.pi) / 180
+	c2[x] = (np.float64(y) * np.pi) / 180
 
 a = 6378.137
 f = 1/298.257223563
@@ -42,3 +43,7 @@ B = uSq / 1024. * (256 + uSq * (-128 + uSq * (74 - 47 * uSq)))
 s = b * A * (σ-Δσ)
 a1 = np.arctan2(np.cos(u2)*np.sin(λ), np.cos(u1)*np.sin(u2)-np.sin(u1)*np.cos(u2)*np.cos(λ))
 a2 = np.arctan2(np.cos(u1)*np.sin(λ), -np.sin(u1)*np.cos(u2)+np.cos(u1)*np.sin(u2)*np.cos(λ))
+
+print('distance        : '+'{0:.2f}'.format(s)+' km')
+print('initial bearing : '+'{0:.2f}'.format(np.degrees(a1))+' °')
+print('final bearing   : '+'{0:.2f}'.format(np.degrees(a2))+' °')
