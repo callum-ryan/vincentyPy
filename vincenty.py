@@ -4,11 +4,13 @@ import sys
 c1 = sys.argv[1].split(',')
 c2 = sys.argv[2].split(',')
 
-for x,y in enumerate(c1):
-	c1[x] = (np.float64(y) * np.pi) / 180
+def to_rad(lat_long):
+	for x, y in enumerate(lat_long):
+		lat_long[x] = (np.float64(y) * np.pi) / 180
+	return lat_long
 
-for x,y in enumerate(c2):
-	c2[x] = (np.float64(y) * np.pi) / 180
+c1 = to_rad(c1)
+c2 = to_rad(c2)
 
 a = 6378.137
 f = 1/298.257223563
